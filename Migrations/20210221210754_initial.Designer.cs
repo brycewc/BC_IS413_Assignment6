@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BC_IS413_Assignment6.Migrations
 {
     [DbContext(typeof(AmazonBooksDBContext))]
-    [Migration("20210218042217_initial")]
+    [Migration("20210221210754_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,6 +49,9 @@ namespace BC_IS413_Assignment6.Migrations
                     b.Property<string>("ISBN")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumOfPages")
+                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");

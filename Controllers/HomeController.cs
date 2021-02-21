@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BC_IS413_Assignment6.Models.ViewModels;
 
 namespace BC_IS413_Assignment6.Controllers
 {
@@ -15,15 +16,32 @@ namespace BC_IS413_Assignment6.Controllers
 
         private IAmazonBooksRepository _repository;
 
+        public int PageSize = 5;
+
         public HomeController(ILogger<HomeController> logger, IAmazonBooksRepository repository)
         {
             _logger = logger;
             _repository = repository; //Setting the IAmazonBooksRepository to the private attribute to send to Index
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            return View(_repository.Books); //Passing the Books objects to Index view, ("Index", _repository.Books);
+            return View(new BookListViewModel
+            {
+                Books = 
+                    _repository
+                    .Books
+                    .OrderBy(p => p.BookId)
+                    .Skip((page - 1) * PageSize)
+                    .Take(PageSize),
+                
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalNumItems = _repository.Books.Count()
+                    }
+            });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
