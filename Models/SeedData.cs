@@ -21,7 +21,8 @@ namespace BC_IS413_Assignment6.Models
             if(!context.Books.Any())
             {
                 context.Books.AddRange(
-                    //Book Ids are not defined here. They are auto generated values
+                    //Book Ids are not defined here. They are auto generated values.
+                    //Middle name/initial is not required, so it can be defined or empty.
                     new Book //Book #1
                     {
                         Title = "Les Miserables",

@@ -16,7 +16,7 @@ namespace BC_IS413_Assignment6.Controllers
 
         private IAmazonBooksRepository _repository;
 
-        public int PageSize = 5;
+        public int PageSize = 5; //Page size variable. Stores how many records you want displayed per page. Change this value to change number of records on a page. 
 
         public HomeController(ILogger<HomeController> logger, IAmazonBooksRepository repository)
         {
